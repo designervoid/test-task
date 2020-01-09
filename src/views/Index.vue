@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Index/>
+    <IndexComponent/>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ import IndexComponent from '@/components/IndexComponent.vue'
 export default {
   name: 'index',
   components: {
-    Index
+    IndexComponent
   }
 }
 </script>
