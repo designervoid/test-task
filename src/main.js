@@ -9,10 +9,10 @@ Vue.config.productionTip = false
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 // internal icons
-import { faGlobe, faCog, faCubes, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faGlobe, faHome, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faGlobe, faCog, faCubes, faSignOutAlt);
+library.add(faGlobe, faHome, faArrowRight);
 Vue.component('vue-fontawesome', FontAwesomeIcon);
 Vue.use(Buefy, {
   defaultIconComponent: 'vue-fontawesome',

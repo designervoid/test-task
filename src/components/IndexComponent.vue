@@ -1,26 +1,8 @@
 <template>
 <div>
   <div class="columns">
-    <div class="column is-mobile is-2">
-      <div class="columns sidebar">
-        <div class="column">
-          image
-        </div>
-        <div class="column">
-          опросы
-        </div>
-        <div class="column">
-          пользователи
-        </div>
-        <div class="column">
-          черные списки
-        </div>
-        <div class="column">
-          колл-центр
-        </div>
-      </div>
-    </div>
-    <div class="column is-mobile is-10">
+    <SidebarComponent/>
+    <div class="column is-mobile is-11">
 
       <div class="columns header-area">
         <div class="column is-mobile is-6">
@@ -35,16 +17,16 @@
 
       <div class="columns navigation-area">
         <div class="column is-mobile is-1">
-          home
+          <b-icon pack="fas" icon="home"></b-icon>
         </div>
         <div class="column is-mobile is-1">
-          arrow
+          <b-icon pack="fas" icon="arrow-right"></b-icon>
         </div>
         <div class="column is-mobile is-2">
           Опросы
         </div>
         <div class="column is-mobile is-1">
-          arrow
+          <b-icon pack="fas" icon="arrow-right"></b-icon>
         </div>
         <div class="column is-mobile is-2">
           Добавить опрос
@@ -77,24 +59,51 @@
                     <div class="">
                       <div class="" v-for="(conditionArea, index) in conditionAreas" v-bind:key="index">
                         <!-- @click="debug(conditionArea.conditionNum);" -->
-                        <h1>Условие {{ conditionArea.conditionNum }}</h1>
-                        <b-select placeholder="Select a name" v-model="conditionArea.selected">
-                          <option>Возраст респондента</option>
-                          <option>Тип карты лояльности</option>
-                          <option>Статус карты лояльности</option>
-                        </b-select>
-
-                        <b-button type="is-primary" expanded>Удалить условие</b-button>
+                        <div class="columns">
+                          <div class="column is-mobile is-4">
+                            <h1>Условие {{ conditionArea.conditionNum }}</h1>
+                          </div>
+                          <div class="column is-mobile is-8">
+                            <b-select placeholder="Select a name" v-model="conditionArea.selected">
+                              <option>Возраст респондента</option>
+                              <option>Тип карты лояльности</option>
+                              <option>Статус карты лояльности</option>
+                            </b-select>
+                          </div>
+                        </div>
 
                         <div class="" v-if="conditionArea.selected == 'Возраст респондента'">
-                          диапазон от и до
+                          <div class="columns">
+                            <div class="column is-mobile is-4">
+                              Диапазон 1
+                            </div>
+                            <div class="column is-mobile is-8">
+                              от и до
+                            </div>
+                          </div>
                         </div>
                         <div class="" v-else-if="conditionArea.selected == 'Тип карты лояльности'">
-                          тип bronze, silver, gold, premium
+                          <div class="columns">
+                            <div class="column is-mobile is-4">
+                              Тип 1
+                            </div>
+                            <div class="column is-mobile is-8">
+                              тип bronze, silver, gold, premium
+                            </div>
+                          </div>
                         </div>
                         <div class="" v-else-if="conditionArea.selected == 'Статус карты лояльности'">
-                          статус активна, неактивна
+                          <div class="columns">
+                            <div class="column is-mobile is-4">
+                              Статус 1
+                            </div>
+                            <div class="column is-mobile is-8">
+                              активно, неактивно
+                            </div>
+                          </div>
                         </div>
+
+                        <b-button type="is-primary delete-button" @click="removeItem(conditionArea.conditionNum)">Удалить условие</b-button>
                       </div>
                     </div>
                   </div>
@@ -113,6 +122,7 @@
 </template>
 
 <script>
+import SidebarComponent from './SidebarComponent.vue'
 export default {
   name: 'IndexComponent',
   data() {
@@ -123,25 +133,27 @@ export default {
       conditionAreas: []
     }
   },
+  components: {
+    SidebarComponent
+  },
   methods: {
     addCondition() {
       this.isClicked = true;
       this.conditionCounter++;
       this.conditionAreas.push({ conditionNum: this.conditionCounter, selected: '' })
-      alert(JSON.stringify(this.conditionAreas))
     },
-    debug(param) {
-      alert(param);
+    removeItem(num){
+    for (var i = 0; i < this.conditionAreas.length; i++){
+       if ( this.conditionAreas[i].conditionNum === num) {
+         this.conditionAreas.splice(i, 1);
+       }
+    }
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.sidebar {
-    display: flex;
-    flex-direction: column;
-}
 .header-area,
 .navigation-area {
     display: flex;
@@ -152,6 +164,14 @@ export default {
     justify-content: center;
 }
 
+.delete-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.header-avatar {
+  align-self:center;
+}
 @media screen and (max-width: 774px) {
     .sidebar {
         flex-direction: row;
