@@ -172,9 +172,4 @@ export default {
 .header-avatar {
   align-self:center;
 }
-@media screen and (max-width: 774px) {
-    .sidebar {
-        flex-direction: row;
-    }
-}
 </style>

@@ -49,4 +49,9 @@ export default {
 .icon {
   width: 100%;
 }
+@media screen and (max-width: 774px) {
+    .sidebar {
+        flex-direction: row;
+    }
+}
 </style>
